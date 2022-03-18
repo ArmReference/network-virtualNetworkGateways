@@ -5,7 +5,7 @@
 Parameter name | Required | Description
 -------------- | -------- | -----------
 name           | Yes      | Resource name.
-activeActive   | No       | ActiveActive flag
+activeActive   | No       | ActiveActive flag.
 bgpSettings    | No       | Virtual network gateway's BGP speaker settings.
 enableBgp      | No       | Whether BGP is enabled for this virtual network gateway or not.
 gatewayType    | Yes      | The type of this virtual network gateway. Possible values are: 'Vpn' and 'ExpressRoute'.
@@ -24,7 +24,7 @@ Resource name.
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-ActiveActive flag
+ActiveActive flag.
 
 - Default value: `False`
 
