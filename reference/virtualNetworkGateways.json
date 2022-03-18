@@ -12,7 +12,7 @@
       "type": "bool",
       "defaultValue": false,
       "metadata": {
-        "description": "ActiveActive flag"
+        "description": "ActiveActive flag."
       }
     },
     "bgpSettings": {
