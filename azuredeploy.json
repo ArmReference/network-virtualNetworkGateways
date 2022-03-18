@@ -22,7 +22,7 @@
   }
  },
  "variables": {
-  "Provider": "/Microsoft.RecoveryServices",
+  "Provider": "/Microsoft.Network/virtualNetworkGateways",
   "Resource": "/reference",
   "templateUri": "[concat('https://',parameters('StorageAccountName'),'.blob.core.windows.net/',parameters('ContainerName'),variables('Provider'),variables('Resource'))]"
  },
