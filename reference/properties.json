@@ -125,27 +125,58 @@
         "description": "The type of this virtual network gateway."
       }
     }
-
   },
   "variables": {
-    "Properties": {
+    "propertiesNoBgp": [
+      {
+        "gatewayType": "[parameters('gatewayType')]",
+        "enablePrivateIpAddress": "[parameters('enablePrivateIpAddress')]",
+        "ipConfigurations": "[parameters('ipConfigurations')]",
+        "customRoutes": "[parameters('customRoutes')]",
+        "natRules": "[parameters('natRules')]",
+        "sku": "[parameters('sku')]",
+        "disableIPSecReplayProtection": "[parameters('disableIPSecReplayProtection')]",
+        "enableDnsForwarding": "[parameters('enableDnsForwarding')]",
+        "gatewayDefaultSite": "[parameters('gatewayDefaultSite')]",
+        "vpnGatewayGeneration": "[if(not(equals(parameters('gatewayType'),'Vpn')),'None',parameters('vpnGatewayGeneration'))]",
+        "vpnClientConfiguration": "[parameters('vpnClientConfiguration')]"
+      },
+      {
+        "activeActive": "[parameters('activeActive')]",
+        "gatewayType": "[parameters('gatewayType')]",
+        "enablePrivateIpAddress": "[parameters('enablePrivateIpAddress')]",
+        "ipConfigurations": "[parameters('ipConfigurations')]",
+        "customRoutes": "[parameters('customRoutes')]",
+        "natRules": "[parameters('natRules')]",
+        "vpnType": "[parameters('vpnType')]",
+        "sku": "[parameters('sku')]",
+        "disableIPSecReplayProtection": "[parameters('disableIPSecReplayProtection')]",
+        "enableDnsForwarding": "[parameters('enableDnsForwarding')]",
+        "gatewayDefaultSite": "[parameters('gatewayDefaultSite')]",
+        "vpnGatewayGeneration": "[if(not(equals(parameters('gatewayType'),'Vpn')),'None',parameters('vpnGatewayGeneration'))]",
+        "vpnClientConfiguration": "[parameters('vpnClientConfiguration')]"
+      }
+    ],
+    "propertiesBGP": {
       "activeActive": "[parameters('activeActive')]",
-      "bgpSettings": "[parameters('bgpSettings')]",
+      "gatewayType": "[parameters('gatewayType')]",
+      "enablePrivateIpAddress": "[parameters('enablePrivateIpAddress')]",
+      "ipConfigurations": "[parameters('ipConfigurations')]",
       "customRoutes": "[parameters('customRoutes')]",
-      "disableIPSecReplayProtection": "[parameters('disableIPSecReplayProtection')]",
+      "natRules": "[parameters('natRules')]",
       "enableBgp": "[parameters('enableBgp')]",
       "enableBgpRouteTranslationForNat": "[parameters('enableBgpRouteTranslationForNat')]",
-      "enableDnsForwarding": "[parameters('enableDnsForwarding')]",
-      "enablePrivateIpAddress": "[parameters('enablePrivateIpAddress')]",
-      "gatewayDefaultSite": "[parameters('gatewayDefaultSite')]",
-      "gatewayType": "[parameters('gatewayType')]",
-      "ipConfigurations": "[parameters('ipConfigurations')]",
-      "natRules": "[parameters('natRules')]",
+      "bgpSettings": "[parameters('bgpSettings')]",
+      "vpnType": "[parameters('vpnType')]",
       "sku": "[parameters('sku')]",
-      "vpnClientConfiguration": "[parameters('vpnClientConfiguration')]",
-      "vpnGatewayGeneration": "[parameters('vpnGatewayGeneration')]",
-      "vpnType": "[parameters('vpnType')]"
-    }
+      "disableIPSecReplayProtection": "[parameters('disableIPSecReplayProtection')]",
+      "enableDnsForwarding": "[parameters('enableDnsForwarding')]",
+      "gatewayDefaultSite": "[parameters('gatewayDefaultSite')]",
+      "vpnGatewayGeneration": "[if(not(equals(parameters('gatewayType'),'Vpn')),'None',parameters('vpnGatewayGeneration'))]",
+      "vpnClientConfiguration": "[parameters('vpnClientConfiguration')]"
+    },
+    "noBgp": "[or(equals(parameters('gatewayType'),'ExpressRoute'),equals(parameters('vpnType'),'PolicyBased'))]",
+    "properties": "[if(variables('noBgp'),if(equals(parameters('gatewayType'),'ExpressRoute'),variables('propertiesNoBgp')[0],variables('propertiesNoBgp')[1]),variables('propertiesBGP'))]"
   },
   "resources": [
   ],
