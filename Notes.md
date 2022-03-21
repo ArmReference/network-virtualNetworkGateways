@@ -17,3 +17,8 @@ This resource doesn't have a defined properties object, everything is referenced
 ### VirtualNetworkGatewayNatRule
 
 It seems we have a stray type, this is outside of the properties and I don't see it referenced in the examples or the schema
+
+### vpnAuthenticationTypes
+
+The property values for this property are not documented outside of the [schema](https://github.com/Azure/azure-resource-manager-schemas/blob/main/schemas/2020-11-01/Microsoft.Network.json#L18315). They are documented in the arm template [documentation](https://docs.microsoft.com/en-us/azure/templates/microsoft.network/2021-05-01/virtualnetworkgateways?tabs=bicep#vpnclientconfiguration).
+
