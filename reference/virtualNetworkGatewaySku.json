@@ -1,17 +1,27 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
       "type": "string",
       "allowedValues": [
         "Basic",
+        "ErGw1AZ",
+        "ErGw2AZ",
+        "ErGw3AZ",
         "HighPerformance",
         "Standard",
         "UltraPerformance",
         "VpnGw1",
+        "VpnGw1AZ",
         "VpnGw2",
-        "VpnGw3"
+        "VpnGw2AZ",
+        "VpnGw3",
+        "VpnGw3AZ",
+        "VpnGw4",
+        "VpnGw4AZ",
+        "VpnGw5",
+        "VpnGw5AZ"
       ],
       "metadata": {
         "description": "Gateway SKU name."
@@ -21,12 +31,22 @@
       "type": "string",
       "allowedValues": [
         "Basic",
+        "ErGw1AZ",
+        "ErGw2AZ",
+        "ErGw3AZ",
         "HighPerformance",
         "Standard",
         "UltraPerformance",
         "VpnGw1",
+        "VpnGw1AZ",
         "VpnGw2",
-        "VpnGw3"
+        "VpnGw2AZ",
+        "VpnGw3",
+        "VpnGw3AZ",
+        "VpnGw4",
+        "VpnGw4AZ",
+        "VpnGw5",
+        "VpnGw5AZ"
       ],
       "metadata": {
         "description": "Gateway SKU tier."
@@ -41,9 +61,6 @@
     }
   },
   "variables": {
-    "comment": {
-      "documentation": "https://docs.microsoft.com/en-us/rest/api/network-gateway/virtualnetworkgateways/createorupdate#definitions_virtualnetworkgatewayipconfiguration"
-    },
     "skus": [
       {
         "name": "[parameters('name')]",
@@ -62,7 +79,10 @@
   "outputs": {
     "virtualNetworkGatewaySku": {
       "type": "object",
-      "value": "[variables('virtualNetworkGatewaySku')]"
+      "value": "[variables('virtualNetworkGatewaySku')]",
+      "metadata": {
+        "description": "VirtualNetworkGatewaySku details."
+      }
     }
   }
 }

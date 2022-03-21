@@ -1,0 +1,112 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "aadAudience": {
+      "type": "string",
+      "metadata": {
+        "description": "The AADAudience property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+      }
+    },
+    "aadIssuer": {
+      "type": "string",
+      "metadata": {
+        "description": "The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+      }
+    },
+    "aadTenant": {
+      "type": "string",
+      "metadata": {
+        "description": "The AADTenant property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+      }
+    },
+    "radiusServerAddress": {
+      "type": "string",
+      "metadata": {
+        "description": "The radius server address property of the VirtualNetworkGateway resource for vpn client connection."
+      }
+    },
+    "radiusServerSecret": {
+      "type": "string",
+      "metadata": {
+        "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection."
+      }
+    },
+    "radiusServers": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "The radiusServers property for multiple radius server configuration."
+      }
+    },
+    "vpnAuthenticationTypes": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "VPN authentication types for the virtual network gateway. String array containing any of:'AAD','Certificate','Radius'"
+      }
+    },
+    "vpnClientAddressPool": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The reference to the address space resource which represents Address space for P2S VpnClient."
+      }
+    },
+    "vpnClientIpsecPolicies": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "VpnClientIpsecPolicies for virtual network gateway P2S client."
+      }
+    },
+    "vpnClientProtocols": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "VpnClientProtocols for Virtual network gateway. String array containing any of: 'IkeV2','OpenVPN','SSTP'"
+      }
+    },
+    "vpnClientRevokedCertificates": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "VpnClientRevokedCertificate for Virtual network gateway."
+      }
+    },
+    "vpnClientRootCertificates": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "VpnClientRootCertificate for virtual network gateway."
+      }
+    }
+  },
+  "variables": {
+    "VpnClientConfiguration": {
+      "aadAudience": "[parameters('aadAudience')]",
+      "aadIssuer": "[parameters('aadIssuer')]",
+      "aadTenant": "[parameters('aadTenant')]",
+      "radiusServerAddress": "[parameters('radiusServerAddress')]",
+      "radiusServerSecret": "[parameters('radiusServerSecret')]",
+      "radiusServers": "[parameters('radiusServers')]",
+      "vpnAuthenticationTypes": "[parameters('vpnAuthenticationTypes')]",
+      "vpnClientAddressPool": "[parameters('vpnClientAddressPool')]",
+      "vpnClientIpsecPolicies": "[parameters('vpnClientIpsecPolicies')]",
+      "vpnClientProtocols": "[parameters('vpnClientProtocols')]",
+      "vpnClientRevokedCertificates": "[parameters('vpnClientRevokedCertificates')]",
+      "vpnClientRootCertificates": "[parameters('vpnClientRootCertificates')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "VpnClientConfiguration": {
+      "type": "object",
+      "value": "[variables('VpnClientConfiguration')]",
+      "metadata": {
+        "description": "VpnClientConfiguration for P2S client."
+      }
+    }
+  }
+}

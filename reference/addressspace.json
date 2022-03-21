@@ -1,0 +1,29 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "addressPrefixes": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "A list of address blocks reserved for this virtual network in CIDR notation."
+      }
+    }
+  },
+  "variables": {
+    "AddressSpace": {
+      "addressPrefixes": "[parameters('addressPrefixes')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "AddressSpace": {
+      "type": "object",
+      "value": "[variables('AddressSpace')]",
+      "metadata": {
+        "description": "AddressSpace contains an array of IP address ranges that can be used by subnets of the virtual network."
+      }
+    }
+  }
+}

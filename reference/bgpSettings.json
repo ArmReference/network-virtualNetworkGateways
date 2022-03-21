@@ -1,5 +1,5 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "asn": {
@@ -7,6 +7,20 @@
       "defaultValue": 0,
       "metadata": {
         "description": "The BGP speaker's ASN."
+      }
+    },
+    "bgpPeeringAddress": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The BGP peering address and BGP identifier of this BGP speaker."
+      }
+    },
+    "bgpPeeringAddresses": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "BGP peering address with IP configuration ID for virtual network gateway."
       }
     },
     "peerWeight": {
@@ -18,11 +32,10 @@
     }
   },
   "variables": {
-    "comment": {
-      "documentation": "https://docs.microsoft.com/en-us/rest/api/network-gateway/virtualnetworkgateways/createorupdate#definitions_bgpsettings"
-    },
     "bgpSettings": {
       "asn": "[parameters('asn')]",
+      "bgpPeeringAddress": "[parameters('bgpPeeringAddress')]",
+      "bgpPeeringAddresses": "[parameters('bgpPeeringAddresses')]",
       "peerWeight": "[parameters('peerWeight')]"
     }
   },
@@ -31,7 +44,10 @@
   "outputs": {
     "bgpSettings": {
       "type": "object",
-      "value": "[variables('bgpSettings')]"
+      "value": "[variables('bgpSettings')]",
+      "metadata": {
+        "description": "Virtual network gateway's BGP speaker settings."
+      }
     }
   }
 }

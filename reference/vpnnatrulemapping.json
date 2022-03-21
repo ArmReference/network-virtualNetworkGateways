@@ -1,0 +1,35 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "addressSpace": {
+      "type": "string",
+      "metadata": {
+        "description": "Address space for Vpn NatRule mapping."
+      }
+    },
+    "portRange": {
+      "type": "string",
+      "metadata": {
+        "description": "Port range for Vpn NatRule mapping."
+      }
+    }
+  },
+  "variables": {
+    "VpnNatRuleMapping": {
+      "addressSpace": "[parameters('addressSpace')]",
+      "portRange": "[parameters('portRange')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "VpnNatRuleMapping": {
+      "type": "object",
+      "value": "[variables('VpnNatRuleMapping')]",
+      "metadata": {
+        "description": "Vpn NatRule mapping."
+      }
+    }
+  }
+}

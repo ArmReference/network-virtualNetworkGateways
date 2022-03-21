@@ -1,0 +1,53 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "customBgpIpAddresses": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "The list of custom BGP peering addresses which belong to IP configuration."
+      }
+    },
+    "defaultBgpIpAddresses": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "The list of default BGP peering addresses which belong to IP configuration."
+      }
+    },
+    "ipconfigurationId": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The ID of IP configuration which belongs to gateway."
+      }
+    },
+    "tunnelIpAddresses": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "The list of tunnel public IP addresses which belong to IP configuration."
+      }
+    }
+  },
+  "variables": {
+    "IPConfigurationBgpPeeringAddress": {
+      "customBgpIpAddresses": "[parameters('customBgpIpAddresses')]",
+      "defaultBgpIpAddresses": "[parameters('defaultBgpIpAddresses')]",
+      "ipconfigurationId": "[parameters('ipconfigurationId')]",
+      "tunnelIpAddresses": "[parameters('tunnelIpAddresses')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "IPConfigurationBgpPeeringAddress": {
+      "type": "object",
+      "value": "[variables('IPConfigurationBgpPeeringAddress')]",
+      "metadata": {
+        "description": "BGP peering address with IP configuration ID for virtual network gateway."
+      }
+    }
+  }
+}

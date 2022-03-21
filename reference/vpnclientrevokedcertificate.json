@@ -1,0 +1,37 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+      }
+    },
+    "thumbprint": {
+      "type": "string",
+      "metadata": {
+        "description": "The revoked VPN client certificate thumbprint."
+      }
+    }
+  },
+  "variables": {
+    "VpnClientRevokedCertificate": {
+      "name": "[parameters('name')]",
+      "properties": {
+        "thumbprint": "[parameters('thumbprint')]"
+      }
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "VpnClientRevokedCertificate": {
+      "type": "object",
+      "value": "[variables('VpnClientRevokedCertificate')]",
+      "metadata": {
+        "description": "VPN client revoked certificate of virtual network gateway."
+      }
+    }
+  }
+}

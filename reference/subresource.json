@@ -1,0 +1,28 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "id": {
+      "type": "string",
+      "metadata": {
+        "description": "Resource ID."
+      }
+    }
+  },
+  "variables": {
+    "SubResource": {
+      "id": "[parameters('id')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "SubResource": {
+      "type": "object",
+      "value": "[variables('SubResource')]",
+      "metadata": {
+        "description": "Reference to another subresource."
+      }
+    }
+  }
+}
