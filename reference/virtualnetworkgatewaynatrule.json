@@ -48,13 +48,6 @@
       "metadata": {
         "description": "The private IP allocation method. Possible values are: 'Static' and 'Dynamic'."
       }
-    },
-    "subnet": {
-      "type": "object",
-      "defaultValue": {},
-      "metadata": {
-        "description": "The reference of the subnet resource."
-      }
     }
   },
   "variables": {
