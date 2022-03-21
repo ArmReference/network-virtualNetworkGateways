@@ -1,11 +1,18 @@
 ﻿{
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
       "type": "string",
       "metadata": {
         "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+      }
+    },
+    "privateIPAddress": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Private IP Address for this gateway."
       }
     },
     "privateIPAllocationMethod": {
@@ -18,33 +25,29 @@
         "description": "The private IP allocation method. Possible values are: 'Static' and 'Dynamic'."
       }
     },
-    "publicIPAddressId": {
-      "type": "string",
+    "publicIPAddress": {
+      "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "The reference of the public IP resource."
       }
     },
-    "subnetId": {
-      "type": "string",
+    "subnet": {
+      "type": "object",
+      "defaultValue": {},
       "metadata": {
         "description": "The reference of the subnet resource."
       }
     }
   },
   "variables": {
-    "comment": {
-      "documentation": "https://docs.microsoft.com/en-us/rest/api/network-gateway/virtualnetworkgateways/createorupdate#definitions_virtualnetworkgatewayipconfiguration"
-    },
     "ipConfigurations": {
       "name": "[parameters('name')]",
       "properties": {
+        "privateIPAddress": "[parameters('privateIPAddress')]",
         "privateIPAllocationMethod": "[parameters('privateIPAllocationMethod')]",
-        "subnet": {
-          "id": "[parameters('subnetId')]"
-        },
-        "publicIpAddress": {
-          "id": "[parameters('publicIPAddressId')]"
-        }
+        "subnet": "[parameters('subnet')]",
+        "publicIpAddress": "[parameters('publicIPAddress')]"
       }
     }
   },
@@ -53,7 +56,10 @@
   "outputs": {
     "ipConfiguration": {
       "type": "object",
-      "value": "[variables('ipConfigurations')]"
+      "value": "[variables('ipConfigurations')]",
+      "metadata": {
+        "description": "IP configuration for virtual network gateway."
+      }
     }
   }
 }
