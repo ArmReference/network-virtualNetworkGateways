@@ -6,6 +6,14 @@
 
 This template defines the properties required to deploy a VirtualNetwork Gateway in Azure.
 
+### Schema
+
+It appeares that the ApiVersion above can't actually be found the [Microsoft.Network.json](https://github.com/Azure/azure-resource-manager-schemas/tree/main/schemas/2021-05-01) appears to be missing from the folder. I've created an issue for this [here](https://github.com/Azure/azure-resource-manager-schemas/issues/2264).
+
 ### Properties
 
 This resource doesn't have a defined properties object, everything is referenced as properties.bgpsettings, this is not an issue just odd, considering the last few I've worked through had a properties object of some sort.
+
+### VirtualNetworkGatewayNatRule
+
+It seems we have a stray type, this is outside of the properties and I don't see it referenced in the examples or the schema
