@@ -40,10 +40,10 @@
     },
     "parameters": {
      "name": {
-      "value": "HighPerformance"
+      "value": "VpnGw1"
      },
      "tier": {
-      "value": "HighPerformance"
+      "value": "VpnGw1"
      }
     }
    }
