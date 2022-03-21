@@ -1,0 +1,45 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "radiusServerAddress": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The address of this radius server."
+      }
+    },
+    "radiusServerScore": {
+      "type": "int",
+      "defaultValue": 0,
+      "metadata": {
+        "description": "The initial score assigned to this radius server."
+      }
+    },
+    "radiusServerSecret": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "The secret used for this radius server."
+      }
+    }
+  },
+  "variables": {
+    "RadiusServer": {
+      "radiusServerAddress": "[parameters('radiusServerAddress')]",
+      "radiusServerScore": "[parameters('radiusServerScore')]",
+      "radiusServerSecret": "[parameters('radiusServerSecret')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "RadiusServer": {
+      "type": "object",
+      "value": "[variables('RadiusServer')]",
+      "metadata": {
+        "description": "Radius Server Settings."
+      }
+    }
+  }
+}
