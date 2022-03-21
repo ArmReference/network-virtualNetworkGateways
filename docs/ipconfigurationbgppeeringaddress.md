@@ -4,44 +4,40 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-asn            | No       | The BGP speaker's ASN.
-bgpPeeringAddress | No       | The BGP peering address and BGP identifier of this BGP speaker.
-bgpPeeringAddresses | No       | BGP peering address with IP configuration ID for virtual network gateway.
-peerWeight     | No       | The weight added to routes learned from this BGP speaker.
+customBgpIpAddresses | No       | The list of custom BGP peering addresses which belong to IP configuration.
+defaultBgpIpAddresses | No       | The list of default BGP peering addresses which belong to IP configuration.
+ipconfigurationId | No       | The ID of IP configuration which belongs to gateway.
+tunnelIpAddresses | No       | The list of tunnel public IP addresses which belong to IP configuration.
 
-### asn
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-The BGP speaker's ASN.
-
-- Default value: `0`
-
-### bgpPeeringAddress
+### customBgpIpAddresses
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-The BGP peering address and BGP identifier of this BGP speaker.
+The list of custom BGP peering addresses which belong to IP configuration.
 
-### bgpPeeringAddresses
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-BGP peering address with IP configuration ID for virtual network gateway.
-
-### peerWeight
+### defaultBgpIpAddresses
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-The weight added to routes learned from this BGP speaker.
+The list of default BGP peering addresses which belong to IP configuration.
 
-- Default value: `0`
+### ipconfigurationId
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The ID of IP configuration which belongs to gateway.
+
+### tunnelIpAddresses
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The list of tunnel public IP addresses which belong to IP configuration.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-bgpSettings | object | Virtual network gateway's BGP speaker settings.
+IPConfigurationBgpPeeringAddress | object | BGP peering address with IP configuration ID for virtual network gateway.
 
 ## Snippets
 
@@ -52,20 +48,20 @@ bgpSettings | object | Virtual network gateway's BGP speaker settings.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/bgpSettings.json"
+        "template": "reference/ipconfigurationbgppeeringaddress.json"
     },
     "parameters": {
-        "asn": {
-            "value": 0
-        },
-        "bgpPeeringAddress": {
-            "value": ""
-        },
-        "bgpPeeringAddresses": {
+        "customBgpIpAddresses": {
             "value": []
         },
-        "peerWeight": {
-            "value": 0
+        "defaultBgpIpAddresses": {
+            "value": []
+        },
+        "ipconfigurationId": {
+            "value": ""
+        },
+        "tunnelIpAddresses": {
+            "value": []
         }
     }
 }

@@ -4,49 +4,49 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-name           | Yes      | Resource name.
-location       | No       | Resource location.
-properties     | No       | Virtual network Gateway Properties
-tags           | No       | Resource tags.
-DependsOn      | No       | Pass dependencies
+name           | Yes      | The name of the resource that is unique within a resource group. This name can be used to access the resource.
+privateIPAddress | No       | Private IP Address for this gateway.
+privateIPAllocationMethod | Yes      | The private IP allocation method. Possible values are: 'Static' and 'Dynamic'.
+publicIPAddress | No       | The reference of the public IP resource.
+subnet         | No       | The reference of the subnet resource.
 
 ### name
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Resource name.
+The name of the resource that is unique within a resource group. This name can be used to access the resource.
 
-### location
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-Resource location.
-
-- Default value: `[resourceGroup().location]`
-
-### properties
+### privateIPAddress
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-Virtual network Gateway Properties
+Private IP Address for this gateway.
 
-### tags
+### privateIPAllocationMethod
+
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
+
+The private IP allocation method. Possible values are: 'Static' and 'Dynamic'.
+
+- Allowed values: `Dynamic`, `Static`
+
+### publicIPAddress
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-Resource tags.
+The reference of the public IP resource.
 
-### DependsOn
+### subnet
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-Pass dependencies
+The reference of the subnet resource.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-virtualNetworkGateway | object |
+VirtualNetworkGatewayIPConfiguration | object | IP configuration for virtual network gateway.
 
 ## Snippets
 
@@ -57,23 +57,23 @@ virtualNetworkGateway | object |
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/virtualNetworkGateways.json"
+        "template": "reference/virtualnetworkgatewayipconfiguration.json"
     },
     "parameters": {
         "name": {
             "value": ""
         },
-        "location": {
-            "value": "[resourceGroup().location]"
+        "privateIPAddress": {
+            "value": ""
         },
-        "properties": {
+        "privateIPAllocationMethod": {
+            "value": ""
+        },
+        "publicIPAddress": {
             "value": {}
         },
-        "tags": {
+        "subnet": {
             "value": {}
-        },
-        "DependsOn": {
-            "value": []
         }
     }
 }

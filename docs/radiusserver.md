@@ -4,44 +4,35 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-asn            | No       | The BGP speaker's ASN.
-bgpPeeringAddress | No       | The BGP peering address and BGP identifier of this BGP speaker.
-bgpPeeringAddresses | No       | BGP peering address with IP configuration ID for virtual network gateway.
-peerWeight     | No       | The weight added to routes learned from this BGP speaker.
+radiusServerAddress | No       | The address of this radius server.
+radiusServerScore | No       | The initial score assigned to this radius server.
+radiusServerSecret | No       | The secret used for this radius server.
 
-### asn
+### radiusServerAddress
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-The BGP speaker's ASN.
+The address of this radius server.
+
+### radiusServerScore
+
+![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
+
+The initial score assigned to this radius server.
 
 - Default value: `0`
 
-### bgpPeeringAddress
+### radiusServerSecret
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
 
-The BGP peering address and BGP identifier of this BGP speaker.
-
-### bgpPeeringAddresses
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-BGP peering address with IP configuration ID for virtual network gateway.
-
-### peerWeight
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-The weight added to routes learned from this BGP speaker.
-
-- Default value: `0`
+The secret used for this radius server.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-bgpSettings | object | Virtual network gateway's BGP speaker settings.
+RadiusServer | object | Radius Server Settings.
 
 ## Snippets
 
@@ -52,20 +43,17 @@ bgpSettings | object | Virtual network gateway's BGP speaker settings.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/bgpSettings.json"
+        "template": "reference/radiusserver.json"
     },
     "parameters": {
-        "asn": {
-            "value": 0
-        },
-        "bgpPeeringAddress": {
+        "radiusServerAddress": {
             "value": ""
         },
-        "bgpPeeringAddresses": {
-            "value": []
-        },
-        "peerWeight": {
+        "radiusServerScore": {
             "value": 0
+        },
+        "radiusServerSecret": {
+            "value": ""
         }
     }
 }

@@ -4,39 +4,26 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-name           | Yes      | Gateway SKU name.
-tier           | Yes      | Gateway SKU tier.
-capactiy       | No       | The capacity.
+name           | Yes      | The name of the resource that is unique within a resource group. This name can be used to access the resource.
+thumbprint     | Yes      | The revoked VPN client certificate thumbprint.
 
 ### name
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Gateway SKU name.
+The name of the resource that is unique within a resource group. This name can be used to access the resource.
 
-- Allowed values: `Basic`, `ErGw1AZ`, `ErGw2AZ`, `ErGw3AZ`, `HighPerformance`, `Standard`, `UltraPerformance`, `VpnGw1`, `VpnGw1AZ`, `VpnGw2`, `VpnGw2AZ`, `VpnGw3`, `VpnGw3AZ`, `VpnGw4`, `VpnGw4AZ`, `VpnGw5`, `VpnGw5AZ`
-
-### tier
+### thumbprint
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Gateway SKU tier.
-
-- Allowed values: `Basic`, `ErGw1AZ`, `ErGw2AZ`, `ErGw3AZ`, `HighPerformance`, `Standard`, `UltraPerformance`, `VpnGw1`, `VpnGw1AZ`, `VpnGw2`, `VpnGw2AZ`, `VpnGw3`, `VpnGw3AZ`, `VpnGw4`, `VpnGw4AZ`, `VpnGw5`, `VpnGw5AZ`
-
-### capactiy
-
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-The capacity.
-
-- Default value: `0`
+The revoked VPN client certificate thumbprint.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-virtualNetworkGatewaySku | object | VirtualNetworkGatewaySku details.
+VpnClientRevokedCertificate | object | VPN client revoked certificate of virtual network gateway.
 
 ## Snippets
 
@@ -47,17 +34,14 @@ virtualNetworkGatewaySku | object | VirtualNetworkGatewaySku details.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/virtualNetworkGatewaySku.json"
+        "template": "reference/vpnclientrevokedcertificate.json"
     },
     "parameters": {
         "name": {
             "value": ""
         },
-        "tier": {
+        "thumbprint": {
             "value": ""
-        },
-        "capactiy": {
-            "value": 0
         }
     }
 }

@@ -4,39 +4,26 @@
 
 Parameter name | Required | Description
 -------------- | -------- | -----------
-name           | Yes      | Gateway SKU name.
-tier           | Yes      | Gateway SKU tier.
-capactiy       | No       | The capacity.
+addressSpace   | Yes      | Address space for Vpn NatRule mapping.
+portRange      | Yes      | Port range for Vpn NatRule mapping.
 
-### name
-
-![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
-
-Gateway SKU name.
-
-- Allowed values: `Basic`, `ErGw1AZ`, `ErGw2AZ`, `ErGw3AZ`, `HighPerformance`, `Standard`, `UltraPerformance`, `VpnGw1`, `VpnGw1AZ`, `VpnGw2`, `VpnGw2AZ`, `VpnGw3`, `VpnGw3AZ`, `VpnGw4`, `VpnGw4AZ`, `VpnGw5`, `VpnGw5AZ`
-
-### tier
+### addressSpace
 
 ![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-Gateway SKU tier.
+Address space for Vpn NatRule mapping.
 
-- Allowed values: `Basic`, `ErGw1AZ`, `ErGw2AZ`, `ErGw3AZ`, `HighPerformance`, `Standard`, `UltraPerformance`, `VpnGw1`, `VpnGw1AZ`, `VpnGw2`, `VpnGw2AZ`, `VpnGw3`, `VpnGw3AZ`, `VpnGw4`, `VpnGw4AZ`, `VpnGw5`, `VpnGw5AZ`
+### portRange
 
-### capactiy
+![Parameter Setting](https://img.shields.io/badge/parameter-required-orange?style=flat-square)
 
-![Parameter Setting](https://img.shields.io/badge/parameter-optional-green?style=flat-square)
-
-The capacity.
-
-- Default value: `0`
+Port range for Vpn NatRule mapping.
 
 ## Outputs
 
 Name | Type | Description
 ---- | ---- | -----------
-virtualNetworkGatewaySku | object | VirtualNetworkGatewaySku details.
+VpnNatRuleMapping | object | Vpn NatRule mapping.
 
 ## Snippets
 
@@ -47,17 +34,14 @@ virtualNetworkGatewaySku | object | VirtualNetworkGatewaySku details.
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "metadata": {
-        "template": "reference/virtualNetworkGatewaySku.json"
+        "template": "reference/vpnnatrulemapping.json"
     },
     "parameters": {
-        "name": {
+        "addressSpace": {
             "value": ""
         },
-        "tier": {
+        "portRange": {
             "value": ""
-        },
-        "capactiy": {
-            "value": 0
         }
     }
 }
