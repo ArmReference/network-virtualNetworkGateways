@@ -1,0 +1,65 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string",
+      "metadata": {
+        "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+      }
+    },
+    "privateIPAddress": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Private IP Address for this gateway."
+      }
+    },
+    "privateIPAllocationMethod": {
+      "type": "string",
+      "allowedValues": [
+        "Dynamic",
+        "Static"
+      ],
+      "metadata": {
+        "description": "The private IP allocation method. Possible values are: 'Static' and 'Dynamic'."
+      }
+    },
+    "publicIPAddress": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The reference of the public IP resource."
+      }
+    },
+    "subnet": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The reference of the subnet resource."
+      }
+    }
+  },
+  "variables": {
+    "VirtualNetworkGatewayNatRule": {
+      "name": "[parameters('name')]",
+      "properties": {
+        "privateIPAddress": "[parameters('privateIPAddress')]",
+        "privateIPAllocationMethod": "[parameters('privateIPAllocationMethod')]",
+        "subnet": "[parameters('subnet')]",
+        "publicIpAddress": "[parameters('publicIPAddress')]"
+      }
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "VirtualNetworkGatewayNatRule": {
+      "type": "object",
+      "value": "[variables('VirtualNetworkGatewayNatRule')]",
+      "metadata": {
+        "description": "IP configuration for virtual network gateway."
+      }
+    }
+  }
+}
