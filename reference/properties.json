@@ -1,0 +1,161 @@
+﻿{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "activeActive": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "ActiveActive flag."
+      }
+    },
+    "bgpSettings": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "Virtual network gateway's BGP speaker settings."
+      }
+    },
+    "customRoutes": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The reference to the address space resource which represents the custom routes address space specified by the customer for virtual network gateway and VpnClient."
+      }
+    },
+    "disableIPSecReplayProtection": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "disableIPSecReplayProtection flag."
+      }
+    },
+    "enableBgp": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Whether BGP is enabled for this virtual network gateway or not."
+      }
+    },
+    "enableBgpRouteTranslationForNat": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "EnableBgpRouteTranslationForNat flag"
+      }
+    },
+    "enableDnsForwarding": {
+      "type": "bool",
+      "defaultValue": true,
+      "metadata": {
+        "description": "Whether dns forwarding is enabled or not."
+      }
+    },
+    "enablePrivateIpAddress": {
+      "type": "bool",
+      "defaultValue": false,
+      "metadata": {
+        "description": "Whether private IP needs to be enabled on this gateway for connections or not."
+      }
+    },
+    "gatewayDefaultSite": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The reference to the LocalNetworkGateway resource which represents local network site having default routes. Assign Null value in case of removing existing default site setting."
+      }
+    },
+    "gatewayType": {
+      "type": "string",
+      "allowedValues": [
+        "ExpressRoute",
+        "LocalGateway",
+        "Vpn"
+      ],
+      "metadata": {
+        "description": "The type of this virtual network gateway."
+      }
+    },
+    "ipConfigurations": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "IP configurations for virtual network gateway."
+      }
+    },
+    "natRules": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": {
+        "description": "NatRules for virtual network gateway."
+      }
+    },
+    "sku": {
+      "type": "object",
+      "metadata": {
+        "description": "The reference to the VirtualNetworkGatewaySku resource which represents the SKU selected for Virtual network gateway."
+      }
+    },
+    "vpnClientConfiguration": {
+      "type": "object",
+      "defaultValue": {},
+      "metadata": {
+        "description": "The reference to the VpnClientConfiguration resource which represents the P2S VpnClient configurations."
+      }
+    },
+    "vpnGatewayGeneration": {
+      "type": "string",
+      "defaultValue": "Generation1",
+      "allowedValues": [
+        "Generation1",
+        "Generation2",
+        "None"
+      ],
+      "metadata": {
+        "description": "The generation for this VirtualNetworkGateway. Must be None if gatewayType is not VPN."
+      }
+    },
+    "vpnType": {
+      "type": "string",
+      "allowedValues": [
+        "PolicyBased",
+        "RouteBased"
+      ],
+      "metadata": {
+        "description": "The type of this virtual network gateway."
+      }
+    }
+
+  },
+  "variables": {
+    "Properties": {
+      "activeActive": "[parameters('activeActive')]",
+      "bgpSettings": "[parameters('bgpSettings')]",
+      "customRoutes": "[parameters('customRoutes')]",
+      "disableIPSecReplayProtection": "[parameters('disableIPSecReplayProtection')]",
+      "enableBgp": "[parameters('enableBgp')]",
+      "enableBgpRouteTranslationForNat": "[parameters('enableBgpRouteTranslationForNat')]",
+      "enableDnsForwarding": "[parameters('enableDnsForwarding')]",
+      "enablePrivateIpAddress": "[parameters('enablePrivateIpAddress')]",
+      "gatewayDefaultSite": "[parameters('gatewayDefaultSite')]",
+      "gatewayType": "[parameters('gatewayType')]",
+      "ipConfigurations": "[parameters('ipConfigurations')]",
+      "natRules": "[parameters('natRules')]",
+      "sku": "[parameters('sku')]",
+      "vpnClientConfiguration": "[parameters('vpnClientConfiguration')]",
+      "vpnGatewayGeneration": "[parameters('vpnGatewayGeneration')]",
+      "vpnType": "[parameters('vpnType')]"
+    }
+  },
+  "resources": [
+  ],
+  "outputs": {
+    "Properties": {
+      "type": "object",
+      "value": "[variables('Properties')]",
+      "metadata": {
+        "description": "Virtual Network Gateway Properties"
+      }
+    }
+  }
+}
