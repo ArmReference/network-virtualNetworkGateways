@@ -17,7 +17,7 @@
   "resources": [
   ],
   "outputs": {
-    "gatewaSubResourceyDefaultSite": {
+    "SubResource": {
       "type": "object",
       "value": "[variables('SubResource')]",
       "metadata": {
