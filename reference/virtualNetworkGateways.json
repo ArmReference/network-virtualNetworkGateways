@@ -72,9 +72,6 @@
     }
   },
   "variables": {
-    "comment": {
-      "documentation": "https://docs.microsoft.com/en-us/rest/api/network-gateway/virtualnetworkgateways/createorupdate#definitions_virtualnetworkgatewayipconfiguration"
-    },
     "propertiesNoBgp": [
       {
         "gatewayType": "[parameters('gatewayType')]",
@@ -101,7 +98,7 @@
     "noBgp": "[or(equals(parameters('gatewayType'),'ExpressRoute'),equals(parameters('vpnType'),'PolicyBased'))]",
     "properties": "[if(variables('noBgp'),if(equals(parameters('gatewayType'),'ExpressRoute'),variables('propertiesNoBgp')[0],variables('propertiesNoBgp')[1]),variables('propertiesBGP'))]",
     "virtualNetworkGateway": {
-      "apiVersion": "2017-09-01",
+      "apiVersion": "2021-05-01",
       "name": "[parameters('name')]",
       "type": "Microsoft.Network/virtualNetworkGateways",
       "location": "[resourceGroup().location]",
