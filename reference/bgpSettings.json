@@ -44,7 +44,10 @@
   "outputs": {
     "bgpSettings": {
       "type": "object",
-      "value": "[variables('bgpSettings')]"
+      "value": "[variables('bgpSettings')]",
+      "metadata": {
+        "description": "Virtual network gateway's BGP speaker settings."
+      }
     }
   }
 }
