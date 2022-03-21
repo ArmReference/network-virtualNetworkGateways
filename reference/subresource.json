@@ -2,7 +2,7 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "LocalNetworkGatewayId": {
+    "id": {
       "type": "string",
       "metadata": {
         "description": "Resource ID."
@@ -10,16 +10,19 @@
     }
   },
   "variables": {
-    "gatewayDefaultSite": {
-      "id": "[parameters('LocalNetworkGatewayId')]"
+    "SubResource": {
+      "id": "[parameters('id')]"
     }
   },
   "resources": [
   ],
   "outputs": {
-    "gatewayDefaultSite": {
+    "gatewaSubResourceyDefaultSite": {
       "type": "object",
-      "value": "[variables('gatewayDefaultSite')]"
+      "value": "[variables('SubResource')]",
+      "metadata": {
+        "description": "Reference to another subresource."
+      }
     }
   }
 }
