@@ -41,7 +41,7 @@
     }
   },
   "variables": {
-    "ipConfigurations": {
+    "VirtualNetworkGatewayIPConfiguration": {
       "name": "[parameters('name')]",
       "properties": {
         "privateIPAddress": "[parameters('privateIPAddress')]",
@@ -54,9 +54,9 @@
   "resources": [
   ],
   "outputs": {
-    "ipConfiguration": {
+    "VirtualNetworkGatewayIPConfiguration": {
       "type": "object",
-      "value": "[variables('ipConfigurations')]",
+      "value": "[variables('VirtualNetworkGatewayIPConfiguration')]",
       "metadata": {
         "description": "IP configuration for virtual network gateway."
       }
