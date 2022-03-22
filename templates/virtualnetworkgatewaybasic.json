@@ -1,0 +1,56 @@
+{
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+ "contentVersion": "1.0.0.1",
+ "parameters": {},
+ "variables": {},
+ "resources": [
+  {
+   "apiVersion": "2021-05-01",
+   "name": "VnetGW",
+   "type": "Microsoft.Network/virtualNetworkGateways",
+   "location": "centralus",
+   "dependsOn": null,
+   "properties": {
+    "activeActive": false,
+    "gatewayType": "Vpn",
+    "enablePrivateIpAddress": false,
+    "ipConfigurations": [
+     {
+      "name": "ipconfig1",
+      "properties": {
+       "privateIPAddress": "",
+       "privateIPAllocationMethod": "Dynamic",
+       "subnet": {
+        "id": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/GatewaySubnet"
+       },
+       "publicIpAddress": {
+        "id": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/publicIPAddresses/myPip"
+       }
+      }
+     }
+    ],
+    "customRoutes": {},
+    "natRules": [],
+    "enableBgp": false,
+    "enableBgpRouteTranslationForNat": false,
+    "bgpSettings": {},
+    "vpnType": "RouteBased",
+    "sku": {
+     "name": "VpnGw1",
+     "tier": "VpnGw1"
+    },
+    "disableIPSecReplayProtection": true,
+    "enableDnsForwarding": false,
+    "gatewayDefaultSite": {
+     "id": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/localNetworkGateways/myLng"
+    },
+    "vpnGatewayGeneration": "Generation1",
+    "vpnClientConfiguration": {}
+   },
+   "tags": {
+    "TagName": "TagValue"
+   }
+  }
+ ],
+ "outputs": {}
+}
