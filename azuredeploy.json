@@ -1,5 +1,5 @@
 {
- "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+ "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
  "contentVersion": "1.0.0.0",
  "parameters": {
   "StorageAccountName": {
@@ -40,26 +40,47 @@
     },
     "parameters": {
      "name": {
-      "value": "HighPerformance"
+      "value": "VpnGw1"
      },
      "tier": {
-      "value": "HighPerformance"
+      "value": "VpnGw1"
      }
     }
    }
   },
   {
-   "name": "BuildBgpSettings",
+   "name": "BuildPublicIp",
    "type": "Microsoft.Resources/deployments",
    "apiVersion": "2016-09-01",
    "dependsOn": [],
    "properties": {
     "mode": "Incremental",
     "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/bgpSettings.json', parameters('SasToken'))]",
+     "uri": "[concat(variables('templateUri'), '/subresource.json', parameters('SasToken'))]",
      "contentVersion": "1.0.0.0"
     },
     "parameters": {
+     "id": {
+      "value": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/publicIPAddresses/myPip"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildSubnet",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2016-09-01",
+   "dependsOn": [],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/subresource.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.0"
+    },
+    "parameters": {
+     "id": {
+      "value": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default"
+     }
     }
    }
   },
@@ -67,11 +88,14 @@
    "name": "BuildVirtualNetworkGatewayIpConfigurations",
    "type": "Microsoft.Resources/deployments",
    "apiVersion": "2016-09-01",
-   "dependsOn": [],
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/', 'BuildPublicIp')]",
+    "[concat('Microsoft.Resources/deployments/', 'BuildSubnet')]"
+   ],
    "properties": {
     "mode": "Incremental",
     "templateLink": {
-     "uri": "[concat(variables('templateUri'), '/ipConfigurations.json', parameters('SasToken'))]",
+     "uri": "[concat(variables('templateUri'), '/virtualnetworkgatewayipconfiguration.json', parameters('SasToken'))]",
      "contentVersion": "1.0.0.0"
     },
     "parameters": {
@@ -81,11 +105,40 @@
      "privateIPAllocationMethod": {
       "value": "Dynamic"
      },
-     "publicIPAddressId": {
-      "value": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/publicIPAddresses/myPip"
+     "publicIPAddress": {
+      "value": "[reference('BuildPublicIp').outputs.SubResource.value]"
      },
-     "subnetId": {
-      "value": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/default"
+     "subnet": {
+      "value": "[reference('BuildSubnet').outputs.SubResource.value]"
+     }
+    }
+   }
+  },
+  {
+   "name": "BuildProperties",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2016-09-01",
+   "dependsOn": [
+    "[concat('Microsoft.Resources/deployments/','BuildVirtualNetworkGatewaySku')]"
+   ],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/properties.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.0"
+    },
+    "parameters": {
+     "gatewayType": {
+      "value": "Vpn"
+     },
+     "vpnType": {
+      "value": "RouteBased"
+     },
+     "ipConfigurations": {
+      "value": "[createArray(reference('BuildVirtualNetworkGatewayIpConfigurations').outputs.VirtualNetworkGatewayIPConfiguration.value)]"
+     },
+     "sku": {
+      "value": "[reference('BuildVirtualNetworkGatewaySku').outputs.virtualNetworkGatewaySku.value]"
      }
     }
    }
@@ -96,8 +149,8 @@
    "apiVersion": "2016-09-01",
    "dependsOn": [
     "[concat('Microsoft.Resources/deployments/','BuildVirtualNetworkGatewayIpConfigurations')]",
-    "[concat('Microsoft.Resources/deployments/','BuildBgpSettings')]",
-    "[concat('Microsoft.Resources/deployments/','BuildVirtualNetworkGatewaySku')]"
+    "[concat('Microsoft.Resources/deployments/','BuildVirtualNetworkGatewaySku')]",
+    "[concat('Microsoft.Resources/deployments/', 'BuildProperties')]"
    ],
    "properties": {
     "mode": "Incremental",
@@ -109,17 +162,11 @@
      "name": {
       "value": "VnetGW"
      },
-     "gatewayType": {
-      "value": "ExpressRoute"
+     "properties": {
+      "value": "[reference('BuildProperties').outputs.Properties.value]"
      },
-     "bgpSettings": {
-      "value": "[reference('BuildBgpSettings').outputs.bgpSettings.value]"
-     },
-     "ipConfigurations": {
-      "value": "[createArray(reference('BuildVirtualNetworkGatewayIpConfigurations').outputs.ipConfiguration.value)]"
-     },
-     "sku": {
-      "value": "[reference('BuildVirtualNetworkGatewaySku').outputs.virtualNetworkGatewaySku.value]"
+     "tags": {
+      "value": "[json('{\"TagName\": \"TagValue\"}')]"
      }
     }
    }
