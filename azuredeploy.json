@@ -85,12 +85,31 @@
    }
   },
   {
+   "name": "BuildLocalNetworkGateway",
+   "type": "Microsoft.Resources/deployments",
+   "apiVersion": "2016-09-01",
+   "dependsOn": [],
+   "properties": {
+    "mode": "Incremental",
+    "templateLink": {
+     "uri": "[concat(variables('templateUri'), '/subresource.json', parameters('SasToken'))]",
+     "contentVersion": "1.0.0.0"
+    },
+    "parameters": {
+     "id": {
+      "value": "/subscriptions/3c22907e-eb72-46ba-8e71-2ed329c8394d/resourceGroups/Testing/providers/Microsoft.Network/localNetworkGateways/myLng"
+     }
+    }
+   }
+  },
+  {
    "name": "BuildVirtualNetworkGatewayIpConfigurations",
    "type": "Microsoft.Resources/deployments",
    "apiVersion": "2016-09-01",
    "dependsOn": [
     "[concat('Microsoft.Resources/deployments/', 'BuildPublicIp')]",
-    "[concat('Microsoft.Resources/deployments/', 'BuildSubnet')]"
+    "[concat('Microsoft.Resources/deployments/', 'BuildSubnet')]",
+    "[concat('Microsoft.Resources/deployments/', 'BuildLocalNetworkGateway')]"
    ],
    "properties": {
     "mode": "Incremental",
@@ -139,6 +158,9 @@
      },
      "sku": {
       "value": "[reference('BuildVirtualNetworkGatewaySku').outputs.virtualNetworkGatewaySku.value]"
+     },
+     "gatewayDefaultSite": {
+      "value": "[reference('BuildLocalNetworkGateway').outputs.SubResource.value]"
      }
     }
    }
