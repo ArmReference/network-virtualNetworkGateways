@@ -71,7 +71,7 @@ EnableBgpRouteTranslationForNat flag
 
 Whether dns forwarding is enabled or not.
 
-- Default value: `True`
+- Default value: `False`
 
 ### enablePrivateIpAddress
 
@@ -174,7 +174,7 @@ Properties | object | Virtual Network Gateway Properties
             "value": false
         },
         "enableDnsForwarding": {
-            "value": true
+            "value": false
         },
         "enablePrivateIpAddress": {
             "value": false
