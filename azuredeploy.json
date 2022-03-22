@@ -1,6 +1,6 @@
 {
  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
- "contentVersion": "1.0.0.0",
+ "contentVersion": "1.0.0.1",
  "parameters": {
   "StorageAccountName": {
    "type": "string",
@@ -36,7 +36,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/virtualNetworkGatewaySku.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "name": {
@@ -57,7 +57,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/subresource.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "id": {
@@ -75,7 +75,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/subresource.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "id": {
@@ -93,7 +93,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/subresource.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "id": {
@@ -115,7 +115,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/virtualnetworkgatewayipconfiguration.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "name": {
@@ -144,7 +144,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/properties.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "gatewayType": {
@@ -178,7 +178,7 @@
     "mode": "Incremental",
     "templateLink": {
      "uri": "[concat(variables('templateUri'), '/virtualNetworkGateways.json', parameters('SasToken'))]",
-     "contentVersion": "1.0.0.0"
+     "contentVersion": "1.0.0.1"
     },
     "parameters": {
      "name": {
@@ -199,7 +199,7 @@
    "type": "object",
    "value": {
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
-    "contentVersion": "1.0.0.0",
+    "contentVersion": "1.0.0.1",
     "parameters": {},
     "variables": {},
     "resources": [
